@@ -1,0 +1,59 @@
+[project]
+name = "foundpose"
+version = "0.0.0"
+description = "FoundPose (local uv environment)"
+readme = "README.md"
+requires-python = ">=3.9,<3.11"
+dependencies = [
+    "torch>=2.3,<2.4",
+    "torchvision>=0.18,<0.19",
+    "omegaconf",
+    "torchmetrics==0.10.3",
+    "fvcore",
+    "iopath",
+    "torchinfo",
+
+    "faiss-cpu==1.8.0",
+
+    "numpy==1.26.4",
+    "scipy==1.13.0",
+
+    "opencv-python==4.5.5.64",
+    "pillow==10.3.0",
+    "matplotlib==3.8.4",
+    "kiwisolver==1.3.1",
+    "imageio==2.34.1",
+
+    "scikit-learn==1.5.0",
+    "scikit-image==0.22.0",
+
+    "kornia==0.7.2",
+    "pypng==0.20220715.0",
+    "pycocotools>=2.0",
+    "webdataset==0.2.86",
+    "pytz==2024.1",
+
+    # Rendering / visualization dependencies used by bop_toolkit and FoundPose utils
+    "PyOpenGL==3.1.0",
+    "pyglet==2.0.15",
+    "pyrender==0.1.45",
+    "vispy==0.12.1",
+    "glumpy==1.2.1",
+    "triangle==20200424",
+
+    "submitit",
+]
+
+[dependency-groups]
+# Optional: needed only for some bop_toolkit renderers / visualization.
+render = [
+    "hand_tracking_toolkit @ git+https://github.com/facebookresearch/hand_tracking_toolkit",
+]
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[tool.uv.extra-build-dependencies]
+# Some legacy sdists still try to invoke pip during build.
+glumpy = ["pip"]
